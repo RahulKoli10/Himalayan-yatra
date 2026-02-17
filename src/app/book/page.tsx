@@ -24,6 +24,13 @@ export default function BookPage() {
   const [date, setDate] = useState("");
   const [people, setPeople] = useState("");
 
+  const today = new Date().toISOString().split("T")[0];
+  const maxDate = (() => {
+    const d = new Date();
+    d.setMonth(d.getMonth() + 6);
+    return d.toISOString().split("T")[0];
+  })();
+
   const handleBooking = () => {
     const message = `
 Hello, I want to book the following package:
@@ -95,12 +102,23 @@ Number of People: ${people}
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="space-y-1.5">
                   <Label htmlFor="date">Travel start date</Label>
-                  <Input
-                    id="date"
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                  />
+                  <div className="relative">
+                    <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                      <Icon icon="mdi:calendar-blank-outline" className="h-5 w-5" />
+                    </span>
+                    <Input
+                      id="date"
+                      type="date"
+                      min={today}
+                      max={maxDate}
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                      className="pl-10 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:left-0 [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:top-0 [&::-webkit-calendar-picker-indicator]:bottom-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0"
+                    />
+                  </div>
+                  <p className="text-[11px] text-slate-500">
+                    Char Dham yatra season typically May–November
+                  </p>
                 </div>
 
                 <div className="space-y-1.5">
