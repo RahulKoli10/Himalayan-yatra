@@ -1,4 +1,5 @@
 import { Icon } from "@iconify/react";
+import { Card } from "@/components/ui/card";
 
 import {
   Card,
