@@ -40,7 +40,7 @@ export default function ContactPage() {
               <Input
                 id="phone"
                 type="tel"
-                placeholder="e.g. 9876543210"
+                placeholder="e.g. 7078101720"
               />
             </div>
 
@@ -95,7 +95,7 @@ export default function ContactPage() {
               Prefer WhatsApp? Click the button below to chat directly with us.
             </p>
             <a
-              href="https://wa.me/917088308738?text=Hi%2C%20I%20want%20to%20plan%20my%20Char%20Dham%20Yatra."
+              href="https://wa.me/917078101720?text=Hi%2C%20I%20want%20to%20plan%20my%20tour."
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-xs font-medium text-white shadow-md hover:bg-emerald-600"

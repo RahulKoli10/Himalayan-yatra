@@ -3,7 +3,7 @@
 import { Icon } from "@iconify/react";
 
 export default function WhatsAppButton() {
-  const phoneNumber = "917088308738";
+  const phoneNumber = "917078101720"; // Replace with your WhatsApp number
   const message = "Hello, I am interested in Char Dham Yatra package.";
 
   const handleClick = () => {

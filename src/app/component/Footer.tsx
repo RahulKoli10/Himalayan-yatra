@@ -109,7 +109,7 @@ export default function Footer() {
             Chat directly with our tour expert for custom itinerary and pricing.
           </p>
           <a
-            href="https://wa.me/917088308738?text=Hi%2C%20I%20am%20interested%20in%20Char%20Dham%20Yatra%202026."
+            href="https://wa.me/917078101720?text=Hi%2C%20I%20am%20interested%20in%20Char%20Dham%20Yatra%202026."
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-sm font-medium text-white shadow-md hover:bg-emerald-600"

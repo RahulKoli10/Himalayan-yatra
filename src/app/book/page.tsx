@@ -58,7 +58,7 @@ Travel Date: ${date}
 Number of People: ${people}
     `;
 
-    const whatsappNumber = "917088308738";
+    const whatsappNumber = "917078101720";
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
       message
     )}`;

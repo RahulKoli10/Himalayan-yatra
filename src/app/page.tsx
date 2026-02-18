@@ -1,3 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
@@ -12,20 +14,62 @@ import {
 } from "@/components/ui/card";
 import Testimonials from "./component/testimonial";
 
+function Feature({ icon, text }: { icon: string; text: string }) {
+  return (
+    <div className="flex items-center gap-2">
+      <Icon icon={icon} className="h-4 w-4 text-emerald-400" />
+      <span>{text}</span>
+    </div>
+  );
+}
+
 export default function Home() {
+  const backgrounds = [
+    "/hero-bg.jpeg",
+    "/hero-bg2.jpeg",
+    "/hero-bg3.jpeg",
+    "/hero-bg4.jpeg",
+  ];
+
+  const [bgIndex, setBgIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % backgrounds.length);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       {/* HERO SECTION */}
-      <main className="relative overflow-hidden bg-slate-950 text-white">
-        <div className="container flex min-h-[80vh] flex-col items-center justify-center gap-10 py-12 md:flex-row md:py-20">
-          {/* Left content */}
-          <div className="relative z-10 max-w-xl space-y-6">
-            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300 ring-1 ring-emerald-400/40">
-              <Icon icon="mdi:star-four-points-circle" className="h-3.5 w-3.5" />
+      <main className="relative overflow-hidden text-white">
+        {/* Background Slider */}
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src={backgrounds[bgIndex]}
+            alt="Char Dham Yatra"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover transition-opacity duration-1000"
+          />
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
+        </div>
+
+        <div className="container mx-auto flex min-h-[90vh] flex-col justify-center px-4 py-16 md:flex-row md:items-center md:gap-12">
+          {/* LEFT CONTENT */}
+          <div className="max-w-xl space-y-6 text-center md:text-left">
+            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-300 ring-1 ring-emerald-400/40 backdrop-blur">
+              <Icon
+                icon="mdi:star-four-points-circle"
+                className="h-3.5 w-3.5"
+              />
               Char Dham Yatra 2026 bookings open
             </span>
 
-            <h1 className="text-balance text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-bold leading-tight sm:text-4xl md:text-5xl lg:text-6xl">
               Sacred Himalayas,
               <span className="bg-linear-to-r from-amber-300 via-emerald-300 to-sky-300 bg-clip-text text-transparent">
                 {" "}
@@ -33,91 +77,83 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className="text-balance text-sm text-slate-200 md:text-base">
-              Travel with a trusted local operator from Haridwar &amp; Dehradun.
-              Clean cabs, expert drivers, and end‑to‑end guidance for your Char
-              Dham Yatra 2026.
+            <p className="text-sm text-slate-200 sm:text-base md:text-lg">
+              Travel with a trusted local operator from Haridwar & Dehradun.
+              Clean cabs, expert drivers, and end-to-end guidance for your Char
+              Dham Yatra.
             </p>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <Button asChild size="lg" className="bg-emerald-500 hover:bg-emerald-600">
+            <div className="flex flex-col gap-3 sm:flex-row sm:justify-center md:justify-start">
+              <Button
+                asChild
+                size="lg"
+                className="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600"
+              >
                 <Link href="/packages">
                   <Icon icon="mdi:mountain" className="mr-2 h-5 w-5" />
                   View Packages
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-slate-600 bg-transparent text-slate-100 hover:bg-slate-900/60">
+
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-auto border-white/40 text-white hover:bg-white/10"
+              >
                 <Link href="/book">
-                  <Icon icon="mdi:whatsapp" className="mr-2 h-5 w-5 text-emerald-400" />
-                  Quick WhatsApp Booking
+                  <Icon
+                    icon="mdi:whatsapp"
+                    className="mr-2 h-5 w-5 text-emerald-400"
+                  />
+                  WhatsApp Booking
                 </Link>
               </Button>
             </div>
 
-            <div className="flex flex-wrap gap-6 text-xs text-slate-300 md:text-sm">
-              <div className="flex items-center gap-2">
-                <Icon icon="mdi:shield-check" className="h-4 w-4 text-emerald-400" />
-                <span>Verified local drivers</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Icon icon="mdi:car-seat" className="h-4 w-4 text-emerald-400" />
-                <span>Clean &amp; premium cabs</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Icon icon="mdi:clock-check-outline" className="h-4 w-4 text-emerald-400" />
-                <span>24×7 WhatsApp support</span>
-              </div>
+            <div className="flex flex-wrap justify-center gap-4 text-xs text-slate-300 sm:text-sm md:justify-start">
+              <Feature icon="mdi:shield-check" text="Verified local drivers" />
+              <Feature icon="mdi:car-seat" text="Clean premium cabs" />
+              <Feature
+                icon="mdi:clock-check-outline"
+                text="24×7 WhatsApp support"
+              />
             </div>
           </div>
 
-          {/* Right image / stats */}
-          <div className="relative z-10 w-full max-w-md md:max-w-lg">
-            <div className="relative overflow-hidden rounded-3xl border border-slate-700/80 bg-slate-900/80 shadow-[0_0_120px_rgba(16,185,129,0.45)]">
+          {/* RIGHT IMAGE CARD */}
+          <div className="mt-12 w-full max-w-md md:mt-0">
+            <div className="relative overflow-hidden rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 shadow-2xl">
               <Image
                 src="/ertiga.jpeg"
-                alt="Premium cab for Char Dham Yatra"
+                alt="Premium cab"
                 width={900}
                 height={600}
-                className="h-64 w-full object-cover sm:h-80"
+                className="h-60 w-full object-cover sm:h-72 md:h-80"
                 priority
               />
-              <div className="absolute inset-0 bg-linear-to-t from-slate-950/80 via-slate-950/10 to-transparent" />
 
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-slate-100 sm:text-sm">
-                <div className="space-y-1">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+
+              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-xs sm:text-sm">
+                <div>
                   <p className="font-semibold">Haridwar ⇄ Char Dham</p>
-                  <p className="text-slate-300">Round‑trip with experienced hill driver</p>
-                </div>
-                <div className="rounded-2xl bg-slate-900/80 px-3 py-2 text-right">
-                  <p className="text-[11px] uppercase tracking-wide text-slate-400">
-                    Starting from
+                  <p className="text-slate-300 text-xs">
+                    Experienced hill driver
                   </p>
-                  <p className="text-sm font-semibold text-emerald-300">₹7,000 / cab</p>
                 </div>
-              </div>
-            </div>
 
-            <div className="mt-4 grid grid-cols-3 gap-3 text-center text-xs text-slate-300 sm:text-sm">
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/70 px-3 py-2">
-                <p className="text-lg font-semibold text-emerald-300">500+</p>
-                <p>Pilgrims served</p>
-              </div>
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/70 px-3 py-2">
-                <p className="text-lg font-semibold text-emerald-300">4.9★</p>
-                <p>Average rating</p>
-              </div>
-              <div className="rounded-2xl border border-slate-800 bg-slate-900/70 px-3 py-2">
-                <p className="text-lg font-semibold text-emerald-300">10+ yrs</p>
-                <p>Yatra experience</p>
+                <div className="rounded-xl bg-black/70 px-3 py-2 text-right">
+                  <p className="text-[10px] uppercase text-slate-400">
+                    Starting
+                  </p>
+                  <p className="text-sm font-semibold text-emerald-300">
+                    ₹7,000
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Background gradients */}
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -left-32 top-10 h-64 w-64 rounded-full bg-emerald-500/15 blur-3xl" />
-          <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-sky-500/20 blur-3xl" />
         </div>
       </main>
 
@@ -133,7 +169,8 @@ export default function Home() {
             </h2>
             <p className="text-sm text-slate-600 md:text-base">
               From route planning to hotel coordination and darshan timings, our
-              team handles everything so you can focus on your spiritual journey.
+              team handles everything so you can focus on your spiritual
+              journey.
             </p>
           </div>
 
@@ -146,8 +183,8 @@ export default function Home() {
                 <div>
                   <CardTitle>Experienced hill drivers</CardTitle>
                   <CardDescription>
-                    Expert in mountain roads, weather patterns and safe driving on
-                    sharp bends.
+                    Expert in mountain roads, weather patterns and safe driving
+                    on sharp bends.
                   </CardDescription>
                 </div>
               </CardHeader>
@@ -161,8 +198,8 @@ export default function Home() {
                 <div>
                   <CardTitle>Clean &amp; comfortable vehicles</CardTitle>
                   <CardDescription>
-                    Regularly serviced Ertiga &amp; Dzire cabs with pushback seats and
-                    ample luggage space.
+                    Regularly serviced Ertiga &amp; Dzire cabs with pushback
+                    seats and ample luggage space.
                   </CardDescription>
                 </div>
               </CardHeader>
@@ -225,8 +262,8 @@ export default function Home() {
                   </span>
                 </div>
                 <CardDescription>
-                  Spacious MPV with comfortable seating, AC and large boot space —
-                  perfect for joint families and small groups.
+                  Spacious MPV with comfortable seating, AC and large boot space
+                  — perfect for joint families and small groups.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -253,8 +290,8 @@ export default function Home() {
                   </span>
                 </div>
                 <CardDescription>
-                  Comfortable sedan with smooth ride quality — perfect for couples
-                  and nuclear families planning a peaceful yatra.
+                  Comfortable sedan with smooth ride quality — perfect for
+                  couples and nuclear families planning a peaceful yatra.
                 </CardDescription>
               </CardContent>
             </Card>
