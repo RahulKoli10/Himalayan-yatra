@@ -81,8 +81,8 @@ export default function Footer() {
                 icon="mdi:phone"
                 className="h-4 w-4 text-emerald-400"
               />
-              <a href="tel:+917088308738" className="hover:text-emerald-400">
-                +91 70883 08738
+              <a href="tel:+917078101720" className="hover:text-emerald-400">
+                +91 70781 01720
               </a>
             </li>
             <li className="flex items-center gap-2">
