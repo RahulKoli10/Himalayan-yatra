@@ -182,7 +182,7 @@ export default function Home() {
                 </div>
                 <div>
                   <CardTitle>Experienced hill drivers</CardTitle>
-                  <CardDescription>
+                  <CardDescription className="pt-3">
                     Expert in mountain roads, weather patterns and safe driving
                     on sharp bends.
                   </CardDescription>
@@ -197,7 +197,7 @@ export default function Home() {
                 </div>
                 <div>
                   <CardTitle>Clean &amp; comfortable vehicles</CardTitle>
-                  <CardDescription>
+                  <CardDescription className="pt-3">
                     Regularly serviced Ertiga &amp; Dzire cabs with pushback
                     seats and ample luggage space.
                   </CardDescription>
@@ -212,7 +212,7 @@ export default function Home() {
                 </div>
                 <div>
                   <CardTitle>Direct WhatsApp support</CardTitle>
-                  <CardDescription>
+                  <CardDescription className="pt-3">
                     Talk directly with the owner on WhatsApp for instant
                     confirmations and changes.
                   </CardDescription>
@@ -272,7 +272,7 @@ export default function Home() {
             <Card className="overflow-hidden">
               <div className="relative">
                 <Image
-                  src="/ertiga.jpeg"
+                  src="/dzire.jpg"
                   alt="Maruti Dzire used for Char Dham Yatra"
                   width={900}
                   height={600}

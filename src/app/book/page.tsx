@@ -76,7 +76,7 @@ Number of People: ${people}
               icon="mdi:calendar-clock-outline"
               className="h-6 w-6 text-emerald-600"
             />
-            Book your Char Dham package
+            Book your Cab
           </CardTitle>
           <CardDescription>
             Share your basic details and we will confirm the fare and full
@@ -177,10 +177,7 @@ Number of People: ${people}
             />
             Why book with Himalayan Yatra?
           </h2>
-          <ul className="space-y-1.5 pl-4">
-            <li className="list-disc">
-              Direct dealing with local owner, no hidden commissions.
-            </li>
+          <ul className="space-y-1.5 pl-4"> 
             <li className="list-disc">
               Transparent cab fare with proper driver allowance &amp; tolls
               explained.

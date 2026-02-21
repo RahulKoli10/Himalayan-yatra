@@ -40,6 +40,12 @@ export default function Navbar() {
             Packages
           </Link>
           <Link
+            href="/daily-booking"
+            className="text-sm font-medium text-slate-700 hover:text-blue-600"
+          >
+            Book for a cab 
+          </Link>
+          <Link
             href="/about"
             className="text-sm font-medium text-slate-700 hover:text-blue-600"
           >
