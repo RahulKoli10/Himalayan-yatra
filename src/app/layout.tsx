@@ -1,5 +1,6 @@
     import type { Metadata } from "next";
     import { Playfair_Display, Poppins } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 import Navbar from "./component/Navbar";
@@ -47,6 +48,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <WhatsAppButton />
+        <SpeedInsights />
       </body>
     </html>
   );
