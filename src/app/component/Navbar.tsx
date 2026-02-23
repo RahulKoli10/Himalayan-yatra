@@ -20,9 +20,7 @@ export default function Navbar() {
             <span className="text-sm font-semibold tracking-wide text-slate-900">
               Himalayan Yatra
             </span>
-            <span className="text-xs text-slate-500">
-              Char Dham Yatra 2026
-            </span>
+            <span className="text-xs text-slate-500">Char Dham Yatra 2026</span>
           </div>
         </Link>
 
@@ -43,7 +41,7 @@ export default function Navbar() {
             href="/daily-booking"
             className="text-sm font-medium text-slate-700 hover:text-blue-600"
           >
-            Book for a cab 
+            Book for a cab
           </Link>
           <Link
             href="/about"
@@ -76,10 +74,7 @@ export default function Navbar() {
             onClick={() => setOpen((prev) => !prev)}
             aria-label="Toggle navigation"
           >
-            <Icon
-              icon={open ? "mi:close" : "mi:menu"}
-              className="h-5 w-5"
-            />
+            <Icon icon={open ? "mi:close" : "mi:menu"} className="h-5 w-5" />
           </button>
         </div>
       </nav>
@@ -94,6 +89,13 @@ export default function Navbar() {
             >
               Home
             </Link>
+            <Link
+            href="/daily-booking"
+            className="rounded-lg px-3 py-2  hover:bg-slate-50"
+             onClick={() => setOpen(false)}
+          >
+            Book for a cab 
+          </Link>
             <Link
               href="/packages"
               className="rounded-lg px-3 py-2 hover:bg-slate-50"

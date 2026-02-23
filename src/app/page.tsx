@@ -143,14 +143,14 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="rounded-xl bg-black/70 px-3 py-2 text-right">
+                {/* <div className="rounded-xl bg-black/70 px-3 py-2 text-right">
                   <p className="text-[10px] uppercase text-slate-400">
                     Starting
                   </p>
                   <p className="text-sm font-semibold text-emerald-300">
                     ₹7,000
                   </p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

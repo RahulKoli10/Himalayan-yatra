@@ -31,5 +31,13 @@ export interface PackageType {
       description:
         "Quick and budget-friendly Kedarnath yatra package.",
     },
+    {
+      id: 4,
+      title: "Tungnath & Chopta",
+      duration: "2 Days / 1 Nights",
+      price: "₹12,000",
+      description:
+        "Quick and budget-friendly Tungnath & Chopta package.",
+    },
   ];
   

@@ -34,7 +34,7 @@ export default function PackageCard({ pkg }: Props) {
           <span className="text-2xl font-semibold text-emerald-600">
             {pkg.price}
           </span>
-          <span className="text-xs text-slate-500">per person (approx.)</span>
+          <span className="text-xs text-slate-500">per cab</span>
         </div>
         <CardDescription className="text-sm text-slate-600">
           {pkg.description}
