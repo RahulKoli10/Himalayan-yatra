@@ -43,12 +43,20 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title:
+ title:
       "Char Dham Cab Service 2026 | Himalayan Yatra Travels",
     description:
-      "Private Dzire & Ertiga taxis for Char Dham, Kedarnath & Uttarakhand routes. Trusted local cab operator.",
+      "Private Dzire & Ertiga taxis for Char Dham & Kedarnath routes.",
     url: "https://himalayan-yatra-lake.vercel.app",
     siteName: "Himalayan Yatra Travels",
+    images: [
+      {
+        url: "/vercel.svg",
+        width: 1200,
+        height: 630,
+        alt: "Himalayan Yatra Travels - Char Dham Cab Service",
+      },
+    ],
     locale: "en_IN",
     type: "website",
   },
