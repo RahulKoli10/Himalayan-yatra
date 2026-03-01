@@ -33,181 +33,207 @@ export default function BookPage() {
 
 function BookForm() {
   const searchParams = useSearchParams();
-  const selectedPackage = searchParams.get("package") || "Not decided yet";
+  const selectedPackage = searchParams.get("package") || "Custom Cab Service";
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
   const [people, setPeople] = useState("");
+  const [vehicle, setVehicle] = useState("Dzire");
+  const [pickup, setPickup] = useState("Haridwar");
+  const [drop, setDrop] = useState("");
+  const [tripType, setTripType] = useState("Round Trip");
 
   const today = new Date().toISOString().split("T")[0];
-  const maxDate = (() => {
-    const d = new Date();
-    d.setMonth(d.getMonth() + 6);
-    return d.toISOString().split("T")[0];
-  })();
 
   const handleBooking = () => {
     const message = `
-Hello, I want to book the following package:
+🚗 Himalayan Yatra Cab Booking Request
 
 Package: ${selectedPackage}
 Name: ${name}
-Phone: ${phone}
+WhatsApp: ${phone}
 Travel Date: ${date}
-Number of People: ${people}
+People: ${people}
+Vehicle: ${vehicle}
+Trip Type: ${tripType}
+Pickup: ${pickup}
+Drop: ${drop}
+
+Please share final fare and availability.
     `;
 
     const whatsappNumber = "917078101720";
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
       message
     )}`;
+
     window.open(url, "_blank");
   };
 
-  const isDisabled = !name || !phone || !date || !people;
+  const isDisabled =
+    !name || !phone || !date || !people || !pickup || !drop;
 
   return (
-    <div className="grid gap-10 md:grid-cols-[1.1fr_0.9fr]">
-      <Card className="border-slate-200/80 bg-white/90 shadow-lg">
+    <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr]">
+      <Card className="shadow-lg border-slate-200 bg-white/95">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-2xl">
             <Icon
-              icon="mdi:calendar-clock-outline"
+              icon="mdi:car"
               className="h-6 w-6 text-emerald-600"
             />
-            Book your Cab
+            Book Your Cab
           </CardTitle>
           <CardDescription>
-            Share your basic details and we will confirm the fare and full
-            itinerary with you on WhatsApp.
+            Fill the details below and confirm instantly on WhatsApp.
           </CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-5">
+
+          {/* Selected Package */}
           <div className="rounded-lg bg-emerald-50 px-4 py-3 text-xs text-emerald-800">
-            <p className="font-semibold">Selected package</p>
+            <p className="font-semibold">Selected Service</p>
             <p>{selectedPackage}</p>
           </div>
 
-          <div className="space-y-4">
+          {/* Name */}
+          <div className="space-y-1.5">
+            <Label>Full Name</Label>
+            <Input
+              placeholder="Your full name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+
+          {/* Phone */}
+          <div className="space-y-1.5">
+            <Label>WhatsApp Number</Label>
+            <Input
+              type="tel"
+              placeholder="9876543210"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+
+          {/* Trip Type */}
+          <div className="space-y-1.5">
+            <Label>Trip Type</Label>
+            <select
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+              value={tripType}
+              onChange={(e) => setTripType(e.target.value)}
+            >
+              <option>Round Trip</option>
+              <option>One Way</option>
+              <option>Full Yatra Package</option>
+            </select>
+          </div>
+
+          {/* Pickup & Drop */}
+          <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-1.5">
-              <Label htmlFor="name">Full name</Label>
+              <Label>Pickup Location</Label>
               <Input
-                id="name"
-                placeholder="Enter your full name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={pickup}
+                onChange={(e) => setPickup(e.target.value)}
               />
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="phone">WhatsApp number</Label>
+              <Label>Drop Location</Label>
               <Input
-                id="phone"
-                type="tel"
-                placeholder="e.g. 9876543210"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Kedarnath / Badrinath / etc"
+                value={drop}
+                onChange={(e) => setDrop(e.target.value)}
               />
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="space-y-1.5">
-                <Label htmlFor="date">Travel start date</Label>
-                <div className="relative">
-                  <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
-                    <Icon
-                      icon="mdi:calendar-blank-outline"
-                      className="h-5 w-5"
-                    />
-                  </span>
-                  <Input
-                    id="date"
-                    type="date"
-                    min={today}
-                    max={maxDate}
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="pl-10 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:left-0 [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:top-0 [&::-webkit-calendar-picker-indicator]:bottom-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0"
-                  />
-                </div>
-                <p className="text-[11px] text-slate-500">
-                  Char Dham yatra season typically May–November
-                </p>
-              </div>
-
-              <div className="space-y-1.5">
-                <Label htmlFor="people">Number of people</Label>
-                <Input
-                  id="people"
-                  type="number"
-                  min={1}
-                  placeholder="e.g. 4"
-                  value={people}
-                  onChange={(e) => setPeople(e.target.value)}
-                />
-              </div>
             </div>
           </div>
 
+          {/* Date + People */}
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-1.5">
+              <Label>Travel Date</Label>
+              <Input
+                type="date"
+                min={today}
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label>Number of People</Label>
+              <Input
+                type="number"
+                min={1}
+                value={people}
+                onChange={(e) => setPeople(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Vehicle Selection */}
+          <div className="space-y-1.5">
+            <Label>Select Vehicle</Label>
+            <select
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+              value={vehicle}
+              onChange={(e) => setVehicle(e.target.value)}
+            >
+              <option>Dzire (4 Seater)</option>
+              <option>Ertiga (6–7 Seater)</option>
+            </select>
+          </div>
+
           <Button
-            className="mt-2 w-full bg-emerald-600 text-white hover:bg-emerald-700"
+            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
             size="lg"
-            onClick={handleBooking}
             disabled={isDisabled}
+            onClick={handleBooking}
           >
             <Icon icon="mdi:whatsapp" className="mr-2 h-5 w-5" />
-            Confirm &amp; chat on WhatsApp
+            Confirm & Chat on WhatsApp
           </Button>
+
           {isDisabled && (
             <p className="text-xs text-slate-500">
-              Fill all fields to continue to WhatsApp.
+              Please fill all required fields.
             </p>
           )}
         </CardContent>
       </Card>
 
-      <div className="space-y-5 text-sm text-slate-600">
-        <div className="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm">
-          <h2 className="mb-2 flex items-center gap-2 text-base font-semibold">
-            <Icon
-              icon="mdi:shield-check"
-              className="h-5 w-5 text-emerald-600"
-            />
-            Why book with Himalayan Yatra?
+      {/* Right Info Panel */}
+      <div className="space-y-5 text-sm">
+        <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="font-semibold mb-2">
+            Why Book With Us?
           </h2>
-          <ul className="space-y-1.5 pl-4"> 
-            <li className="list-disc">
-              Transparent cab fare with proper driver allowance &amp; tolls
-              explained.
-            </li>
-            <li className="list-disc">
-              Help with hotel selection, helicopter booking guidance and route
-              planning.
-            </li>
+          <ul className="space-y-2 list-disc pl-5 text-slate-600">
+            <li>Private cab only (no sharing)</li>
+            <li>Experienced hill drivers</li>
+            <li>Transparent pricing</li>
+            <li>Flexible pickup timing</li>
           </ul>
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-slate-950 p-5 text-slate-100">
-          <h2 className="mb-2 flex items-center gap-2 text-base font-semibold">
-            <Icon
-              icon="mdi:clock-check-outline"
-              className="h-5 w-5 text-emerald-400"
-            />
-            Quick response promise
+        <div className="rounded-2xl bg-slate-950 text-white p-5">
+          <h2 className="font-semibold mb-2">
+            Fast Response
           </h2>
           <p className="text-xs text-slate-300">
-            Once you submit this form and land on WhatsApp, our team usually
-            replies within{" "}
-            <span className="font-semibold text-emerald-300">
-              10–15 minutes
-            </span>{" "}
-            between 7 AM – 10 PM.
+            We usually respond within
+            <span className="text-emerald-400 font-semibold">
+              {" "}10–15 minutes
+            </span>
+            {" "}between 7 AM – 10 PM.
           </p>
         </div>
       </div>
     </div>
   );
-}
-
+} 

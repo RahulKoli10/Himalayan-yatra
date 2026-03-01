@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Icon } from "@iconify/react";
 
 import { Button } from "@/components/ui/button";
@@ -12,101 +15,198 @@ import {
 } from "@/components/ui/card";
 
 export default function ContactPage() {
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    city: "",
+    tripType: "Char Dham",
+    people: "",
+    notes: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    if (!form.name || !form.phone) {
+      alert("Please fill required fields");
+      return;
+    }
+
+    setLoading(true);
+
+    const message = `
+📞 *Call Back Request – Himalayan Yatra Travels*
+
+👤 Name: ${form.name}
+📱 WhatsApp: ${form.phone}
+🏙 Travelling From: ${form.city || "Not specified"}
+🛕 Trip Type: ${form.tripType}
+👥 Number of People: ${form.people || "Not specified"}
+
+📝 Notes:
+${form.notes || "None"}
+
+Please contact and share cab details.
+    `;
+
+    const encoded = encodeURIComponent(message);
+
+    setTimeout(() => {
+      window.location.href = `https://wa.me/917078101720?text=${encoded}`;
+    }, 500);
+  };
+
   return (
-    <main className="section-muted min-h-screen py-12">
+    <main className="min-h-screen bg-slate-50 py-14">
       <div className="container grid gap-10 md:grid-cols-[1.1fr_0.9fr]">
-        <Card className="border-slate-200/80 bg-white/90 shadow-lg">
+
+        {/* LEFT FORM */}
+        <Card className="border border-slate-200 bg-white shadow-lg">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-2xl">
               <Icon
                 icon="mdi:phone-check-outline"
                 className="h-6 w-6 text-emerald-600"
               />
-              Get a call back for your yatra plan
+              Request a Call / WhatsApp
             </CardTitle>
             <CardDescription>
-              Share your contact details and our team will call or message you
-              with a suitable itinerary and quote.
+              Planning Char Dham or daily cab travel? Share your details and we
+              will contact you shortly.
             </CardDescription>
           </CardHeader>
+
           <CardContent className="space-y-4">
+
             <div className="space-y-1.5">
-              <Label htmlFor="name">Full name</Label>
-              <Input id="name" placeholder="Enter your full name" />
+              <Label>Full Name *</Label>
+              <Input
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                placeholder="Enter your full name"
+              />
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="phone">WhatsApp number</Label>
+              <Label>WhatsApp Number *</Label>
               <Input
-                id="phone"
+                name="phone"
                 type="tel"
-                placeholder="e.g. 7078101720"
+                value={form.phone}
+                onChange={handleChange}
+                placeholder="7078101720"
               />
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="city">City you are travelling from</Label>
-              <Input id="city" placeholder="e.g. Delhi, Mumbai, Ahmedabad" />
-            </div>
-
-            <div className="space-y-1.5">
-              <Label htmlFor="notes">Trip notes (optional)</Label>
+              <Label>City You Are Travelling From</Label>
               <Input
-                id="notes"
-                placeholder="Approx. dates, number of days, senior citizens etc."
+                name="city"
+                value={form.city}
+                onChange={handleChange}
+                placeholder="Delhi / Mumbai / Ahmedabad"
               />
             </div>
 
-            <Button className="mt-2 w-full bg-emerald-600 hover:bg-emerald-700">
-              <Icon icon="mdi:phone-forward" className="mr-2 h-5 w-5" />
-              Request a call / WhatsApp
+            <div className="space-y-1.5">
+              <Label>Trip Type</Label>
+              <select
+                name="tripType"
+                value={form.tripType}
+                onChange={handleChange}
+                className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm"
+              >
+                <option>Char Dham</option>
+                <option>Kedarnath</option>
+                <option>Do Dham</option>
+                <option>Daily Cab Booking</option>
+                <option>Custom Tour</option>
+              </select>
+            </div>
+
+            <div className="space-y-1.5">
+              <Label>Number of People</Label>
+              <Input
+                name="people"
+                type="number"
+                min={1}
+                value={form.people}
+                onChange={handleChange}
+                placeholder="e.g. 4"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label>Trip Notes (Optional)</Label>
+              <Input
+                name="notes"
+                value={form.notes}
+                onChange={handleChange}
+                placeholder="Approx dates, senior citizens, cab type etc."
+              />
+            </div>
+
+            <Button
+              onClick={handleSubmit}
+              disabled={loading}
+              className="w-full bg-emerald-600 hover:bg-emerald-700"
+            >
+              <Icon icon="mdi:whatsapp" className="mr-2 h-5 w-5" />
+              {loading ? "Redirecting..." : "Send on WhatsApp"}
             </Button>
+
+            <p className="text-xs text-slate-500 text-center">
+              We usually respond within 10–15 minutes (7 AM – 10 PM)
+            </p>
+
           </CardContent>
         </Card>
 
-        <div className="space-y-6 text-sm text-slate-600">
-          <div className="rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-semibold">
+        {/* RIGHT INFO PANEL */}
+        <div className="space-y-6 text-sm">
+
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 className="mb-3 flex items-center gap-2 font-semibold">
               <Icon
                 icon="mdi:map-marker-radius-outline"
                 className="h-5 w-5 text-emerald-600"
               />
-              Office &amp; operation area
+              Operation Area
             </h2>
-            <p className="mb-2">
-              We primarily operate from Haridwar, Rishikesh and Dehradun for Char
-              Dham departures.
+            <p>
+              We operate mainly from Haridwar, Rishikesh & Dehradun for
+              Char Dham departures.
             </p>
-            <p className="text-xs text-slate-500">
-              Pick‑ups from Delhi, Chandigarh and other cities can be arranged on
-              request.
+            <p className="text-xs text-slate-500 mt-2">
+              Delhi, Chandigarh & airport pickups available on request.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-slate-950 p-5 text-slate-100">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-semibold">
+          <div className="rounded-2xl bg-slate-950 p-5 text-white">
+            <h2 className="mb-2 flex items-center gap-2 font-semibold">
               <Icon
-                icon="mdi:whatsapp"
+                icon="mdi:car"
                 className="h-5 w-5 text-emerald-400"
               />
-              Direct WhatsApp support
+              Why Choose Us?
             </h2>
-            <p className="mb-3 text-xs text-slate-300">
-              Prefer WhatsApp? Click the button below to chat directly with us.
-            </p>
-            <a
-              href="https://wa.me/917078101720?text=Hi%2C%20I%20want%20to%20plan%20my%20tour."
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-4 py-2 text-xs font-medium text-white shadow-md hover:bg-emerald-600"
-            >
-              <Icon icon="mdi:whatsapp" className="h-4 w-4" />
-              Chat on WhatsApp
-            </a>
+            <ul className="space-y-1 text-xs text-slate-300 list-disc pl-5">
+              <li>Own Dzire & Ertiga vehicles</li>
+              <li>Experienced hill driving</li>
+              <li>Transparent cab pricing</li>
+              <li>Direct owner communication</li>
+            </ul>
           </div>
+
         </div>
       </div>
     </main>
   );
 }
-
